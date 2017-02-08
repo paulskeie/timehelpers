@@ -24,3 +24,26 @@ class DateSequence(object):
 		self.dateseq=dates
 	def __iter__(self):
 		return iter(self.dateseq)
+
+class TimeIterator(object):
+	"""
+		Initialize with a datetime instance and a timedelta instance
+		ti=TimeIterator(datetimestart,timedeltastep)
+		nextdatetime=ti.next()
+		or
+		nextdatetime=ti()
+	"""
+	def __init__(self,datetimestart,timedeltastep):
+		self.datetimestart=datetimestart
+		self.timedeltastep=timedeltastep
+		self.nextdatetime=datetimestart
+	def next(self):
+		x=self.nextdatetime
+		self.nextdatetime=x+self.timedeltastep
+		return x
+	def __call__(self):
+		return self.next()
+	def __repr__(self):
+		return u"nextdatetime: %s, timedeltastep: %s" % (self.nextdatetime,self.timedeltastep)
+
+
